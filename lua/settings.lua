@@ -5,5 +5,6 @@ o.expandtab = true;
 o.background = "dark"
 o.termguicolors = true
 o.relativenumber = true;
+o.number = true;
 vim.cmd('let mapleader = "<Space>"')
 vim.cmd("filetype detect")
