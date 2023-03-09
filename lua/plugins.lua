@@ -13,7 +13,6 @@ local packer_bootstrap = ensure_packer()
 
 require('packer').startup(function(use)
    use 'wbthomason/packer.nvim'
-   use 'neovim/nvim-lspconfig'
    use 'hrsh7th/cmp-nvim-lsp'
    use 'hrsh7th/cmp-buffer'
    use 'hrsh7th/cmp-path'
@@ -25,6 +24,7 @@ require('packer').startup(function(use)
 
    use 'williamboman/mason.nvim'
    use 'williamboman/mason-lspconfig.nvim'
+   use 'neovim/nvim-lspconfig'
 
    -- For vsnip users.
    use 'hrsh7th/cmp-vsnip'
