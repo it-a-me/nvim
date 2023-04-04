@@ -1,6 +1,8 @@
 require "plugins"
 require 'vim_lsp'
 
+vim.cmd("autocmd BufEnter *.slint :setlocal filetype=slint")
+
 
 
 vim.cmd([[filetype on]])

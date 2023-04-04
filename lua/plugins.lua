@@ -35,12 +35,16 @@ require('packer').startup(function(use)
    use 'https://github.com/sainnhe/everforest'
    use 'https://github.com/sainnhe/sonokai'
 
+
+   use 'https://github.com/elkowar/yuck.vim'
+   use 'slint-ui/vim-slint'
+
    -- rust
    use 'simrat39/rust-tools.nvim'
 
    -- rust-debuggingDebugging
    use 'nvim-lua/plenary.nvim'
-   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
    -- Automatically set up your configuration after cloning packer.nvim
    -- Put this at the end after all plugins
    if packer_bootstrap then
