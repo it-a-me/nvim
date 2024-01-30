@@ -44,6 +44,14 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+require('autofmt')
+vim.keymap.set('n', "<leader>f", "<cmd>Autofmt<CR>", {})
+
+vim.keymap.set('t', "<C-w>", "<C-\\><C-N><C-w>", {})
+vim.keymap.set('n', "<leader>n", "<cmd>bot split | resize 15 | startinsert | terminal<CR>", {})
+vim.cmd("packadd termdebug")
+
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -71,7 +79,7 @@ require('lazy').setup({
 
   -- Git related plugins
   'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  --'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -88,7 +96,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim',       opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -113,7 +121,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -188,7 +196,11 @@ require('lazy').setup({
       end,
     },
   },
-
+  {
+    'sainnhe/everforest',
+    priority = 1000,
+    opts = {}
+  },
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -277,7 +289,8 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = true
+--vim.wo.number = true
+vim.wo.relativenumber = true;
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -285,7 +298,7 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+--vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -508,8 +521,9 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+  nmap('<leader>r', vim.lsp.buf.rename, '[R]ename')
+  nmap('<leader>a', vim.lsp.buf.code_action, 'Code [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -534,6 +548,7 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+  AddFormatter(bufnr, vim.lsp.buf.format)
 end
 
 -- document existing key chains
