@@ -7,3 +7,4 @@ vim.keymap.set('n', '<leader>t', '<cmd>bot split | res 15 | terminal<cr>i', { de
 vim.keymap.set('n', '<leader>o', '<cmd>tabnew | Ntree<cr>', { desc = 'Open a File Picker' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>', { desc = 'Change Window' })
+--vim.keymap.set('t', "<C-w>", "<C-\\><C-N><C-w>", {})
