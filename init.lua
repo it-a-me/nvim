@@ -84,7 +84,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -398,7 +398,9 @@ require('lazy').setup({
 
   { -- Autoformat
     'stevearc/conform.nvim',
-    lazy = false,
+    -- enable if format on stave is enabled
+    --event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
     keys = {
       {
         '<A-f>',
@@ -422,10 +424,22 @@ require('lazy').setup({
       --     lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       --   }
       -- end,
+      formatters = {
+        pandoc_gfm = {
+          inherit = false,
+          command = 'pandoc',
+          args = { "--from", "gfm", "--to", "gfm" },
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
+        markdown = { 'pandoc_gfm' },
       },
     },
+    init = function()
+      -- If you want the formatexpr, here is the place to set it
+      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
   },
 
   { -- Autocompletion
