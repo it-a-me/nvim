@@ -2,7 +2,6 @@ vim.bo.shiftwidth = 2
 
 local function r_output(err, data)
   local channel_id = vim.api.nvim_buf_get_var(0, 'R_IPC')
-  vim.print('call to r_output from buf ' .. channel_id)
   if channel_id == nil then
     return
   end
@@ -18,12 +17,15 @@ end
 
 local function setup_repr_buf()
   local buf_id = vim.api.nvim_create_buf(true, false)
-  vim.api.nvim_open_win(buf_id, false, { vertical = false })
-  vim.api.nvim_buf_set_var(buf_id, 'StopRepr', StopRepr)
-  return buf_id
+  local source_buf = vim.api.nvim_get_current_buf()
+  local win_id = vim.api.nvim_open_win(buf_id, false, { vertical = false })
+  vim.api.nvim_buf_create_user_command(buf_id, 'ReprStop', function()
+    StopRepr(source_buf)
+  end, {})
+  return buf_id, win_id
 end
 
-local function start_r_handle()
+local function start_r_handle(buf_path)
   local r_ipc = vim.system({ 'R', '--vanilla', '--quiet', '--interactive' }, {
     stdout = function(err, data)
       vim.defer_fn(function()
@@ -37,15 +39,18 @@ local function start_r_handle()
     end,
     stdin = true,
   }, StopRepr)
+  r_ipc:write(vim.keycode '<C-L>' .. 'source("' .. buf_path .. '")\n')
   return r_ipc
 end
 
-function StartRepr()
-  if vim.b['R_Repr'] ~= nil then
+function StartRepr(source_buf)
+  if pcall(function()
+    vim.api.nvim_buf_get_var(source_buf, 'R_Repr')
+  end) then
     print 'repr already started'
     return
   end
-  local r_ipc = start_r_handle()
+  local r_ipc = start_r_handle(vim.api.nvim_buf_get_name(source_buf))
   local buf_id = setup_repr_buf()
   local term_writer = vim.api.nvim_open_term(buf_id, {
     on_input = function(_, _, _, data)
@@ -53,20 +58,23 @@ function StartRepr()
     end,
   })
   vim.api.nvim_buf_set_var(buf_id, 'R_IPC', term_writer)
-  vim.api.nvim_buf_set_var(0, 'R_IPC', term_writer)
+  vim.api.nvim_buf_set_var(source_buf, 'R_IPC', term_writer)
 
   local aucmd_id = vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
-    callback = function() end,
-    buffer = 0,
+    callback = function()
+      r_ipc = start_r_handle(vim.api.nvim_buf_get_name(source_buf))
+    end,
+    buffer = source_buf,
   })
 
-  vim.api.nvim_buf_set_var(0, 'R_Repr', { buf_id = buf_id, aucmd_id = aucmd_id })
+  vim.api.nvim_buf_set_var(source_buf, 'R_Repr', { buf_id = buf_id, aucmd_id = aucmd_id })
 end
 
-function StopRepr()
-  local repr_config = vim.b['R_Repr']
-
-  if repr_config == nil then
+function StopRepr(source_buf)
+  local repr_config
+  if not pcall(function()
+    repr_config = vim.api.nvim_buf_get_var(source_buf, 'R_Repr')
+  end) then
     print 'repr is not running'
     return
   end
@@ -76,8 +84,13 @@ function StopRepr()
     force = true,
   })
 
-  vim.api.nvim_buf_del_var(0, 'R_Repr')
+  vim.api.nvim_buf_del_var(source_buf, 'R_Repr')
 end
 
-vim.api.nvim_buf_create_user_command(0, 'ReprStart', StartRepr, {})
-vim.api.nvim_buf_create_user_command(0, 'ReprStop', StopRepr, {})
+vim.api.nvim_buf_create_user_command(0, 'ReprStart', function()
+  StartRepr(0)
+end, {})
+
+vim.api.nvim_buf_create_user_command(0, 'ReprStop', function()
+  StopRepr(0)
+end, {})
