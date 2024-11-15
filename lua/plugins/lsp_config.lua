@@ -180,5 +180,17 @@ return { -- LSP Configuration & Plugins
       },
     }
     require 'lspconfig'.denols.setup {}
+    require 'lspconfig'.gopls.setup
+    {
+      settings = {
+        gopls = {
+          hints = {
+            parameterNames = true,
+            assignVariableTypes = true,
+            constantValues = true
+          }
+        }
+      }
+    }
   end,
 }
