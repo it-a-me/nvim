@@ -8,7 +8,6 @@ return { -- Autocompletion
       build = 'make install_jsregexp',
     },
     'saadparwaiz1/cmp_luasnip',
-
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
   },
