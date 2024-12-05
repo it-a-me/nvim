@@ -38,23 +38,4 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
-
 })
-
-vim.api.nvim_create_user_command("Test", function()
-  if vim.b.Test ~= nil then
-    vim.b.Test()
-  else
-    print("no tests available")
-  end
-end, { desc = "Run Tests" })
-
-vim.api.nvim_create_user_command("Lint", function()
-  if vim.b.Lint ~= nil then
-    vim.b.Lint()
-  else
-    print("no tests available")
-  end
-end, { desc = "Run Linter" })
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
