@@ -115,10 +115,10 @@ return { -- LSP Configuration & Plugins
     }
     local lspconfig = require 'lspconfig'
     local configs = require 'lspconfig.configs'
-    if not configs.rosyln then
-      configs.rosyln = require('plugins/servers/rosyln')
-    end
-    lspconfig.rosyln.setup {}
+    -- if not configs.rosyln then
+    --   configs.rosyln = require('plugins/servers/rosyln')
+    -- end
+    -- lspconfig.rosyln.setup {}
     lspconfig.denols.setup {}
     lspconfig.gopls.setup
     {
