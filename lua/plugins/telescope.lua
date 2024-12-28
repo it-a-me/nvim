@@ -37,5 +37,6 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search [F]iles' })
     vim.keymap.set('n', '<leader>e', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = '[B]uffers' })
+    vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[B]uffers' })
   end,
 }
