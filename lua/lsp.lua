@@ -1,6 +1,9 @@
 vim.lsp.inlay_hint.enable(true)
 vim.diagnostic.config({ virtual_text = true })
 
+vim.keymap.set("n", "<M-f>", vim.lsp.buf.format,
+  { desc = "Format buffer with lsp server" })
+
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -13,10 +16,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       -- Enable auto-completion
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
     end
-    vim.keymap.set('i', '<C-n>', vim.lsp.completion.trigger)
-    vim.keymap.set('i', '<C-p>', vim.lsp.completion.trigger)
-    vim.keymap.set("n", "<M-f>", function()
-      vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-    end)
+    vim.keymap.set('i', '<C-n>', vim.lsp.completion.trigger, { buffer = true })
+    vim.keymap.set('i', '<C-p>', vim.lsp.completion.trigger, { buffer = true })
   end,
 })
