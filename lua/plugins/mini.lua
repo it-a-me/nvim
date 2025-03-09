@@ -5,11 +5,16 @@ return {
     require 'mini.icons'.setup {}
 
     require 'mini.files'.setup {}
-    vim.keymap.set('n', '<leader>e', MiniFiles.open)
+    vim.keymap.set('n', '<leader>e', MiniFiles.open, { desc = "Open File Explorer" })
 
-    require('mini.pick').setup()
-    vim.keymap.set('n', '<leader>f', MiniPick.builtin.files)
-    vim.keymap.set('n', '<leader>b', MiniPick.builtin.buffers)
-    vim.keymap.set('n', '<leader>h', MiniPick.builtin.help)
+    require 'mini.git'.setup {}
+
+    require 'mini.extra'.setup {}
+    require 'plugins.mini.pick'
+
+    require 'mini.statusline'.setup {}
+    require 'mini.notify'.setup {}
+
+    require 'plugins.mini.clues'
   end
 }
