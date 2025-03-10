@@ -31,6 +31,9 @@ miniclue.setup({
     { mode = 'n', keys = 'z' },
     { mode = 'x', keys = 'z' },
   },
+  window = {
+    delay = 300
+  },
 
   clues = {
     -- Help Commands
