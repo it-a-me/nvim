@@ -9,7 +9,6 @@ local ws_root = function()
 end
 
 vim.keymap.set('n', '<leader>b', MiniPick.builtin.buffers, { desc = "Open Buffers" })
-vim.keymap.set('n', '<leader>g', MiniPick.builtin.grep_live, { desc = "Live Grep" })
 
 vim.keymap.set('n', '<leader>f',
   function()
@@ -17,6 +16,11 @@ vim.keymap.set('n', '<leader>f',
   end,
   { desc = 'Find Files' })
 
+vim.keymap.set('n', '<leader>wg',
+  function()
+    MiniPick.builtin.grep_live({}, ws_root())
+  end,
+  { desc = "Workspace Grep" })
 
 vim.keymap.set('n', '<leader>hh', MiniPick.builtin.help, { desc = 'Help' })
 vim.keymap.set('n', '<leader>hc', MiniExtra.pickers.commands, { desc = 'Commands' })
