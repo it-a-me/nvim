@@ -5,9 +5,6 @@ miniclue.setup({
     { mode = 'n', keys = '<Leader>' },
     { mode = 'x', keys = '<Leader>' },
 
-    -- Help triggers
-    { mode = 'n', keys = '<Leader>h' },
-
     -- Built-in completion
     { mode = 'i', keys = '<C-x>' },
 
@@ -36,6 +33,12 @@ miniclue.setup({
   },
 
   clues = {
+    -- Help Commands
+    { mode = 'n', keys = '<Leader>h', desc = "Help" },
+
+    -- Workspace Commands
+    { mode = 'n', keys = '<Leader>w', desc = "Workspace" },
+
     -- Enhance this by adding descriptions for <Leader> mapping groups
     miniclue.gen_clues.builtin_completion(),
     miniclue.gen_clues.g(),
