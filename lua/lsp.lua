@@ -11,8 +11,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = args.buf })
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = args.buf })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'goto definition', buffer = args.buf })
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'godo declaration', buffer = args.buf })
 
     if client:supports_method('textDocument/completion') then
       -- Enable auto-completion
