@@ -8,6 +8,9 @@ local setup_gopls = function()
           constantValues = true,
           assignVariableTypes = true,
           compositeLiteralFields = true,
+        },
+        codelenses = {
+          test = true
         }
       }
     }
