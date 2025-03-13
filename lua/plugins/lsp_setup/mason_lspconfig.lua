@@ -2,6 +2,8 @@ local setup_gopls = function()
   require 'lspconfig'.gopls.setup {
     settings = {
       gopls = {
+        staticcheck = true,
+        gofumpt = true,
         hints = {
           constantValues = true,
           assignVariableTypes = true,
