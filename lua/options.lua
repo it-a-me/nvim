@@ -11,6 +11,9 @@ vim.opt.number = true
 -- Always enable mouse
 vim.opt.mouse = 'a'
 
+-- Set indent style
+vim.opt.shiftwidth = 2
+
 -- Indent folded lines the same as their parents
 vim.opt.breakindent = true
 
