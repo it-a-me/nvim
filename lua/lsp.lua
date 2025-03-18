@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('i', '<C-n>',
       function()
         if vim.fn.pumvisible() == 0 then
-          vim.lsp.completion.trigger()
+          vim.lsp.completion.get()
         end
       end
       , { buffer = true })
