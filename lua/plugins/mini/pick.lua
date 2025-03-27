@@ -22,6 +22,8 @@ vim.keymap.set('n', '<leader>wg',
   end,
   { desc = "Workspace Grep" })
 
+vim.keymap.set('n', '<leader>wd', MiniExtra.pickers.diagnostic, { desc = "Workspace Diagnostics" })
+
 vim.keymap.set('n', '<leader>hh', MiniPick.builtin.help, { desc = 'Help' })
 vim.keymap.set('n', '<leader>hc', MiniExtra.pickers.commands, { desc = 'Commands' })
 vim.keymap.set('n', '<leader>hk', MiniExtra.pickers.keymaps, { desc = 'Keymaps' })
