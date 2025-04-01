@@ -1,9 +1,6 @@
 vim.lsp.inlay_hint.enable(true)
 vim.diagnostic.config({ virtual_text = true })
 
-vim.keymap.set("n", "<M-f>", vim.lsp.buf.format,
-  { desc = "Format buffer with lsp server" })
-
 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action,
   { desc = "Code Action" })
 
