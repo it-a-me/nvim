@@ -1,7 +1,7 @@
 local mason = {
   'williamboman/mason-lspconfig.nvim',
   dependencies = {
-    { 'williamboman/mason.nvim', config = {} }
+    { 'williamboman/mason.nvim', opts = {} }
   },
   opts = {
     ensure_installed = {},
