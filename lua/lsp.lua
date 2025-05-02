@@ -1,6 +1,9 @@
 vim.lsp.inlay_hint.enable(true)
 vim.diagnostic.config({ virtual_text = true })
 
+vim.keymap.set("n", "<C-k>", vim.diagnostic.open_float,
+  { desc = "Open Diagnostics" })
+
 vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action,
   { desc = "Code Action" })
 
