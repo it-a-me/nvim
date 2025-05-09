@@ -7,6 +7,7 @@ return {
         constantValues = true,
         assignVariableTypes = true,
         compositeLiteralFields = true,
+        rangeVariableTypes = true,
       },
       codelenses = {
         test = true
