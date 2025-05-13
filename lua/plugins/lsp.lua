@@ -1,7 +1,7 @@
 local mason = {
-  'williamboman/mason-lspconfig.nvim',
+  'mason-org/mason-lspconfig.nvim',
   dependencies = {
-    { 'williamboman/mason.nvim', opts = {} }
+    { 'mason-org/mason.nvim', opts = {} }
   },
   opts = {
     ensure_installed = {},
@@ -26,5 +26,7 @@ return {
           require('lsp_overrides' .. '.' .. lsp_server))
       end
     end
+    vim.lsp.enable('rosyln')
+    vim.lsp.enable('vala_ls')
   end
 }
