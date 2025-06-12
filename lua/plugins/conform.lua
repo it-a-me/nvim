@@ -14,7 +14,11 @@ return {
     formatters = {
       pandoc = {
         command = "pandoc",
-        args = { "--from", "gfm", "--to", "gfm" },
+        args = {
+          "--from", "markdown",
+          "--standalone", -- Support metadata blocks
+          "--to", "markdown-simple_tables"
+        },
         inherit = false
       }
     }
