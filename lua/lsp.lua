@@ -15,6 +15,13 @@ vim.keymap.set("n", "<leader>qo",
   end,
   { desc = "Open Quickfix List" })
 
+vim.keymap.set('i', '<C-n>',
+  function()
+    if vim.fn.pumvisible() == 0 then
+      vim.lsp.completion.get()
+    end
+  end, {})
+
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
@@ -32,15 +39,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       -- Enable auto-completion
       vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
     end
-
-
-    vim.keymap.set('i', '<C-n>',
-      function()
-        if vim.fn.pumvisible() == 0 then
-          vim.lsp.completion.get()
-        end
-      end
-      , { buffer = true })
   end,
 })
 
