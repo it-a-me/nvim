@@ -41,6 +41,8 @@ miniclue.setup({
 
     -- Workspace Commands
     { mode = 'n', keys = '<Leader>w', desc = "Workspace" },
+    -- Debugger Commands
+    { mode = 'n', keys = '<Leader>g', desc = "Debugger" },
 
     -- Enhance this by adding descriptions for <Leader> mapping groups
     miniclue.gen_clues.builtin_completion(),
