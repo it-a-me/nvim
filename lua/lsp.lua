@@ -1,6 +1,8 @@
 vim.lsp.inlay_hint.enable(true)
 vim.diagnostic.config({ virtual_text = true })
 
+vim.lsp.enable('roslyn_ls')
+
 vim.keymap.set("n", "<C-k>", vim.diagnostic.open_float,
   { desc = "Open Diagnostics" })
 
