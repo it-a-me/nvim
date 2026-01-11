@@ -33,12 +33,9 @@ return {
   on_attach = function(client, bufnr)
     client.server_capabilities.semanticTokensProvider = nil
   end,
-  handlers = (function()
-    local handlers = vim.deepcopy(vim.lsp.handlers)
-    handlers["$/progress"] = nil
-    print(handlers)
-    return handlers
-  end)(),
+  handlers = {
+    ["$/progress"] = function() end
+  },
   -- this recommended settings values taken from  https://github.com/ionide/FsAutoComplete?tab=readme-ov-file#settings
   settings = {
     FSharp = {
