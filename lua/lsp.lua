@@ -50,9 +50,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
-
-vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave", "BufWritePost" }, {
-  callback = function(args)
-    vim.lsp.codelens.refresh({ bufnr = args.buf })
-  end
-})
