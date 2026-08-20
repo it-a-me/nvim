@@ -4,6 +4,7 @@ vim.diagnostic.config({ virtual_text = true })
 vim.lsp.enable('roslyn_ls')
 vim.lsp.enable('slint_lsp')
 vim.lsp.enable('mojo')
+vim.lsp.enable('ocamllsp')
 
 vim.keymap.set("n", "<C-k>", vim.diagnostic.open_float,
   { desc = "Open Diagnostics" })
